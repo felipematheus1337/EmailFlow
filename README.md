@@ -49,7 +49,9 @@ O sistema é dividido em **dois monolitos**:
 - Recebe mensagens via HTTP
 - Salva detalhes da mensagem no MongoDB
 
-> Diagrama de sistema disponível no repositório
+### Diagrama de sistema:
+
+<img src="https://github.com/felipematheus1337/EmailFlow/blob/dev/diagram.png?raw=true"/>
 
 ---
 
