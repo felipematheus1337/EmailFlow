@@ -20,6 +20,7 @@ O **EmailFlow** é uma aplicação Java com Spring Boot desenvolvida para demons
 ## 🛠️ Tecnologias Utilizadas
 
 - Java 17+
+- Docker
 - Spring Boot
 - Spring Web
 - Spring Data JPA + SQL Server
@@ -28,7 +29,7 @@ O **EmailFlow** é uma aplicação Java com Spring Boot desenvolvida para demons
 - Spring Actuator + Prometheus
 - Grafana
 - MongoDB (via outro monolito com REST API)
-- HTTP Client (Spring WebClient ou RestTemplate)
+- HTTP Client
 - Logback + MDC (Logging estruturado)
 
 ---
@@ -76,8 +77,4 @@ O sistema é dividido em **dois monolitos**:
 - Endpoints do Actuator exportados para Prometheus
 - Dashboards configuráveis no Grafana
 - Visualização de tentativas, falhas, tempos de resposta e sucesso
-
----
-
-## 📁 Estrutura de Pastas (Simplificada)
 
