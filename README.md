@@ -19,7 +19,7 @@ O **EmailFlow** é uma aplicação Java com Spring Boot desenvolvida para demons
 
 ## 🛠️ Tecnologias Utilizadas
 
-- Java 17+
+- Java 21+
 - Docker
 - Spring Boot
 - Spring Web
