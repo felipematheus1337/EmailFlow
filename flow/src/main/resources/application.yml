@@ -32,5 +32,6 @@ spring:
             enable: true
 
 
-rabbitmq:
+kafka:
   topic: mail
+  group-id: mailgroup
