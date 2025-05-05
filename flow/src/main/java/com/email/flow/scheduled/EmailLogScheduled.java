@@ -5,6 +5,7 @@ import com.email.flow.domain.SendLog;
 import com.email.flow.dtos.EmailDispatchKafkaDTO;
 import com.email.flow.repositories.SendLogRepository;
 import com.email.flow.services.EmailService;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
@@ -23,7 +24,7 @@ public class EmailLogScheduled {
     }
 
     @Scheduled(cron = "0 0 */3 * * *")
-    public void retryFailedEmails() {
+    public void retryFailedEmails() throws JsonProcessingException {
       List<SendLog> failedDTO = repository.findByStatus(MailStatus.ERROR);
 
       var emailsToDispatch = failedDTO.stream()
