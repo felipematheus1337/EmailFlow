@@ -10,6 +10,7 @@ O **EmailFlow** é uma aplicação Java com Spring Boot desenvolvida para demons
 
 - Envio assíncrono de e-mails com **Apache Kafka**
 - Tratamento de falhas com **Resilience4j** (retry, fallback e circuit breaker)
+- Retentativas com @Scheduled
 - Observabilidade com **Prometheus** e **Grafana**
 - Persistência de logs e histórico no **SQL Server**
 - Armazenamento de mensagens enviadas no **MongoDB**, via **Spring HTTP Client**
