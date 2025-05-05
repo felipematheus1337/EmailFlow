@@ -1,9 +1,6 @@
 package com.email.flow.domain;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -18,6 +15,7 @@ public class SendLog implements Serializable {
     private String to;
     private String subject;
     private LocalDateTime attemptedAt;
+    @Enumerated(EnumType.STRING)
     private MailStatus status;
     private String body;
 
@@ -51,5 +49,13 @@ public class SendLog implements Serializable {
 
     public String getBody() {
         return body;
+    }
+
+    public void setStatus(MailStatus status) {
+        this.status = status;
+    }
+
+    public void setAttemptedAt(LocalDateTime attemptedAt) {
+        this.attemptedAt = attemptedAt;
     }
 }

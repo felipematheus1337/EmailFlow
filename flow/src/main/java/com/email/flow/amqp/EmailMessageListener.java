@@ -16,12 +16,10 @@ import java.util.List;
 @Component
 public class EmailMessageListener {
 
-    private final SendLogRepository repository;
     private final ObjectMapper mapper;
     private final EmailService service;
 
     EmailMessageListener(SendLogRepository repository, ObjectMapper mapper, EmailService service) {
-        this.repository = repository;
         this.mapper = mapper;
         this.service = service;
     }
