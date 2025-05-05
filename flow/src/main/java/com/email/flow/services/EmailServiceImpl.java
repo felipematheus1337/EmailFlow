@@ -1,8 +1,10 @@
 package com.email.flow.services;
 
+import com.email.flow.adapter.EmailSendLogAdapter;
 import com.email.flow.domain.MailStatus;
 import com.email.flow.domain.SendLog;
 import com.email.flow.dtos.EmailDispatchKafkaDTO;
+import com.email.flow.dtos.EmailMessageDocument;
 import com.email.flow.repositories.SendLogRepository;
 import com.email.flow.utils.BusinessUtils;
 import jakarta.mail.MessagingException;
@@ -24,11 +26,13 @@ public class EmailServiceImpl implements EmailService {
     private final SendLogRepository repository;
     private final JavaMailSender mailSender;
     private final BusinessUtils businessUtils;
+    private final EmailSendLogAdapter emailSendLogAdapter;
 
-    public EmailServiceImpl(SendLogRepository repository, JavaMailSender mailSender, BusinessUtils businessUtils) {
+    public EmailServiceImpl(SendLogRepository repository, JavaMailSender mailSender, BusinessUtils businessUtils, EmailSendLogAdapter emailSendLogAdapter) {
         this.repository = repository;
         this.mailSender = mailSender;
         this.businessUtils = businessUtils;
+        this.emailSendLogAdapter = emailSendLogAdapter;
     }
 
     @Override
@@ -54,7 +58,10 @@ public class EmailServiceImpl implements EmailService {
 
         CompletableFuture.allOf(futures.toArray(new CompletableFuture[0])).join();
 
-        repository.saveAll(mailsToSend);
+         var savedMails = repository.saveAll(mailsToSend);
+
+         List<EmailMessageDocument> documents = this.emailSendLogAdapter.adapt(savedMails);
+
 
     }
 

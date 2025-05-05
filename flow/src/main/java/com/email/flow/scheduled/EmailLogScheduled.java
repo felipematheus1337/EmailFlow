@@ -27,7 +27,10 @@ public class EmailLogScheduled {
       List<SendLog> failedDTO = repository.findByStatus(MailStatus.ERROR);
 
       var emailsToDispatch = failedDTO.stream()
-              .map(s -> new EmailDispatchKafkaDTO(s.getId(), s.getTo(), s.getSubject(), s.getBody()))
+              .map(s -> new EmailDispatchKafkaDTO(s.getId(),
+                      s.getTo(),
+                      s.getSubject(),
+                      s.getBody()))
               .toList();
 
       service.send(emailsToDispatch);
