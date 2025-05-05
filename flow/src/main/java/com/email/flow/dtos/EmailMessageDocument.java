@@ -18,9 +18,9 @@ public class EmailMessageDocument {
     private String body;
 
     @JsonProperty(required = true)
-    private MailStatus status;
+    private String status;
 
-    public EmailMessageDocument(String sendLogId, String to, String subject, String body, MailStatus status) {
+    public EmailMessageDocument(String sendLogId, String to, String subject, String body, String status) {
         this.sendLogId = sendLogId;
         this.to = to;
         this.subject = subject;

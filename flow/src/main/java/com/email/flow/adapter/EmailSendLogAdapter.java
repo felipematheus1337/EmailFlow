@@ -20,6 +20,6 @@ public class EmailSendLogAdapter {
     private EmailMessageDocument adaptSendLogToEmailMessageDocument(SendLog sendLog) {
 
         return new EmailMessageDocument(sendLog.getId().toString(),
-                sendLog.getTo(), sendLog.getSubject(), sendLog.getBody(), sendLog.getStatus());
+                sendLog.getTo(), sendLog.getSubject(), sendLog.getBody(), sendLog.getStatus().toString());
     }
 }
