@@ -7,6 +7,7 @@ import com.email.flow.dtos.EmailDispatchKafkaDTO;
 import com.email.flow.dtos.EmailMessageDocument;
 import com.email.flow.repositories.SendLogRepository;
 import com.email.flow.utils.BusinessUtils;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
 import org.springframework.mail.MailException;
@@ -27,16 +28,18 @@ public class EmailServiceImpl implements EmailService {
     private final JavaMailSender mailSender;
     private final BusinessUtils businessUtils;
     private final EmailSendLogAdapter emailSendLogAdapter;
+    private final MongoForwardService mongoService;
 
-    public EmailServiceImpl(SendLogRepository repository, JavaMailSender mailSender, BusinessUtils businessUtils, EmailSendLogAdapter emailSendLogAdapter) {
+    public EmailServiceImpl(SendLogRepository repository, JavaMailSender mailSender, BusinessUtils businessUtils, EmailSendLogAdapter emailSendLogAdapter, MongoForwardService service) {
         this.repository = repository;
         this.mailSender = mailSender;
         this.businessUtils = businessUtils;
         this.emailSendLogAdapter = emailSendLogAdapter;
+        this.mongoService = service;
     }
 
     @Override
-    public void send(List<EmailDispatchKafkaDTO> dtos) {
+    public void send(List<EmailDispatchKafkaDTO> dtos) throws JsonProcessingException {
 
         List<UUID> mailIds = dtos.stream()
                 .map(EmailDispatchKafkaDTO::Id)
@@ -62,6 +65,7 @@ public class EmailServiceImpl implements EmailService {
 
          List<EmailMessageDocument> documents = this.emailSendLogAdapter.adapt(savedMails);
 
+         mongoService.send(documents);
 
     }
 

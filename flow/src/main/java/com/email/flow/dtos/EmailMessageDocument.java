@@ -3,7 +3,9 @@ package com.email.flow.dtos;
 import com.email.flow.domain.MailStatus;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class EmailMessageDocument {
+import java.io.Serializable;
+
+public class EmailMessageDocument implements Serializable {
 
     @JsonProperty(required = true)
     private String sendLogId;
