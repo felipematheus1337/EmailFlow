@@ -18,65 +18,38 @@ public class SendLog implements Serializable {
     private String to;
     private String subject;
     private LocalDateTime attemptedAt;
-    private Long durationMs;
-    private String status;
+    private MailStatus status;
+    private String body;
 
-    public SendLog(String to, String subject, LocalDateTime attemptedAt, Long durationMs, String status) {
+    public SendLog(String to, String subject, LocalDateTime attemptedAt, MailStatus status, String body) {
         this.to = to;
         this.subject = subject;
         this.attemptedAt = attemptedAt;
-        this.durationMs = durationMs;
         this.status = status;
-    }
-
-    public SendLog() {
+        this.body = body;
     }
 
     public UUID getId() {
         return id;
     }
 
-    public void setId(UUID id) {
-        this.id = id;
-    }
-
     public String getTo() {
         return to;
-    }
-
-    public void setTo(String to) {
-        this.to = to;
     }
 
     public String getSubject() {
         return subject;
     }
 
-    public void setSubject(String subject) {
-        this.subject = subject;
-    }
-
     public LocalDateTime getAttemptedAt() {
         return attemptedAt;
     }
 
-    public void setAttemptedAt(LocalDateTime attemptedAt) {
-        this.attemptedAt = attemptedAt;
-    }
-
-    public Long getDurationMs() {
-        return durationMs;
-    }
-
-    public void setDurationMs(Long durationMs) {
-        this.durationMs = durationMs;
-    }
-
-    public String getStatus() {
+    public MailStatus getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public String getBody() {
+        return body;
     }
 }
