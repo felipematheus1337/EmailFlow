@@ -2,14 +2,14 @@ version: "3.8"
 
 services:
   zookeeper:
-    image: confluentinc/cp-zookeeper:7.3.0
+    image: zookeeper
     environment:
       ZOOKEEPER_CLIENT_PORT: 2181
     ports:
       - "2181:2181"
 
   kafka:
-    image: confluentinc/cp-kafka:7.3.0
+    image: apache/kafka:latest
     depends_on:
       - zookeeper
     ports:
@@ -41,7 +41,7 @@ services:
     volumes:
       - mongo-data:/data/db
 
-  email-flow-app:
+  flow:
     build:
       context: ./flow
     depends_on:
@@ -56,12 +56,12 @@ services:
       SPRING_KAFKA_BOOTSTRAP_SERVERS: kafka:9092
       SPRING_MAIL_HOST: smtp.gmail.com
       SPRING_MAIL_PORT: 587
-      SPRING_MAIL_USERNAME: your-email@gmail.com
-      SPRING_MAIL_PASSWORD: your-password
+      SPRING_MAIL_USERNAME: lulu23@ethereal.email
+      SPRING_MAIL_PASSWORD: VHHtF8RpUQPC1T7JgJ
       SPRING_MAIL_PROPERTIES_MAIL_SMTP_AUTH: true
       SPRING_MAIL_PROPERTIES_MAIL_SMTP_STARTTLS_ENABLE: true
 
-  email-storage-app:
+  storage:
     build:
       context: ./storage
     depends_on:

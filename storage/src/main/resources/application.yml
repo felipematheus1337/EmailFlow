@@ -1,0 +1,9 @@
+server:
+  port: 8081
+
+spring:
+  application:
+  name: storage
+  data:
+    mongodb:
+      uri: mongodb://mongodb:27017/emailstorage

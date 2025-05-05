@@ -1,0 +1,22 @@
+spring:
+  application:
+    name: flow
+  datasource:
+    url: jdbc:sqlserver://sqlserver:1433;databaseName=EmailFlowDB
+    username: sa
+    password: YourStrong@Password123
+
+  kafka:
+    bootstrap-servers: kafka:9092
+
+  mail:
+    host: smtp.ethereal.email
+    port: 587
+    username: lulu23@ethereal.email
+    password: VHHtF8RpUQPC1T7JgJ
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
