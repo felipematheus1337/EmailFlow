@@ -12,11 +12,10 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Queue;
 import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.stream.Collectors;
 
 @Service
@@ -35,8 +34,6 @@ public class EmailServiceImpl implements EmailService {
     @Override
     public void send(List<EmailDispatchKafkaDTO> dtos) {
 
-        Queue<SendLog> failedQueue = new ConcurrentLinkedQueue<>();
-
         List<UUID> mailIds = dtos.stream()
                 .map(EmailDispatchKafkaDTO::Id)
                 .collect(Collectors.toList());
@@ -50,7 +47,8 @@ public class EmailServiceImpl implements EmailService {
                               mail.setStatus(MailStatus.SENT);
                             } catch (Exception e) {
                                 mail.setStatus(MailStatus.ERROR);
-                                failedQueue.add(mail);
+                            } finally {
+                                mail.setAttemptedAt(LocalDateTime.now());
                             }
         })).collect(Collectors.toList());
 
